@@ -115,13 +115,12 @@ def run_code():
                 waiting_for_input = False
                 output_text.insert(T.END, "\n")
                 output_text.see(T.END)
-                window.after(10, lambda: None)  # Small delay to ensure proper handling
+                window.after(10, lambda: None)  
             return "break"
 
         output_text.bind("<Key>", on_key)
         output_text.bind("<Return>", on_enter)
 
-        # Wait for input to be completed
         while waiting_for_input:
             try:
                 window.update()
@@ -136,13 +135,12 @@ def run_code():
     builtins.input = custom_input
 
     try:
-        # Redirect output to both the stream and the output widget
+     
         def write_to_both(text):
             output_stream.write(text)
             output_text.insert(T.END, text)
             output_text.see(T.END)
 
-        # Create a custom stdout that writes to both
         class DualOutput:
             def write(self, text):
                 output_stream.write(text)
